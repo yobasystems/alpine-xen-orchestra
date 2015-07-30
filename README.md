@@ -8,4 +8,11 @@ Nothing fancy here, just getting the needed dependencies and code from the sourc
 
 Eventually you might be able to make the image smaller and so. Feel free to clone, PR or merge the changes upstream (to other repos).
 
+# Run it!
+
+## To forward all external traffic from port 18080 to the container’s port 80
+docker run -p 0.0.0.0:18080:80 jpoa/docker-xo
+
+You can obviously start the container with other options, this is just the quick startup.
+
 [1]:	https://github.com/sammcj/docker-xen-orchestra "sammck"

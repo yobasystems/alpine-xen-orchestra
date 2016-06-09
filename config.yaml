@@ -26,7 +26,7 @@
 # identifier.
 #
 # Default: undefined
-#user: 'nobody'
+user: 'nobody'
 
 # Group to run XO-Server as.
 #
@@ -34,7 +34,7 @@
 # numeric identifier.
 #
 # Default: undefined
-#group: 'nogroup'
+group: 'nogroup'
 
 #=====================================================================
 
@@ -57,42 +57,12 @@ http:
       # Port on which the server is listening on.
       #
       # Default: undefined
-      port: 80
+      port: 8080
 
-      # Instead of `host` and `port` a path to a UNIX socket may be
-      # specified (overrides `host` and `port`).
-      #
-      # Default: undefined
-      #socket: './http.sock'
-
-    # Basic HTTPS.
-    # -
-    #   # The only difference is the presence of the certificate and the
-    #   # key.
-
-    #   #hostname: '127.0.0.1'
-    #   port: 443
-
-    #   # File containing the certificate (PEM format).
-    #   #
-    #   # Default: undefined
-    #   certificate: './certificate.pem'
-
-    #   # File containing the private key (PEM format).
-    #   #
-    #   # If the key is encrypted, the passphrase will be asked at
-    #   # server startup.
-    #   #
-    #   # Default: undefined
-    #   key: './key.pem'
 
   # List of files/directories which will be served.
   mounts:
-    '/': '../xo-web/dist/'
-
-  # List of proxied URLs (HTTP & WebSockets).
-  proxies:
-    # '/any/url': 'http://localhost:54722'
+    '/': '/app/xo-web/dist/'
 
 #=====================================================================
 

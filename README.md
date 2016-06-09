@@ -4,8 +4,8 @@ Simple docker file to build an up-to-date Xen Orchestra container.
 
 # Run it!
 
-## To forward all external traffic from port 18080 to the container’s port 80
-docker run -p 0.0.0.0:18080:80 adamant/xen-orchestra
+## To forward all external traffic from port 80 to the container’s port 8080
+docker run -p 0.0.0.0:80:8080 adamant/xen-orchestra
 
 
 # Notes

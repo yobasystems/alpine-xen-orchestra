@@ -13,7 +13,7 @@ MAINTAINER Adam Dodman <adam.dodman@gmx.com>
 
 # Install requirements
 RUN apt-get -q update && \
-    apt-get -q install build-essential redis-server libpng-dev git python-minimal curl supervisor
+    apt-get -qy install build-essential redis-server libpng-dev git python-minimal curl supervisor
 
 # Install nodeJS
 RUN curl -o /usr/local/bin/n https://raw.githubusercontent.com/visionmedia/n/master/bin/n && \
@@ -27,7 +27,7 @@ RUN sed -i 's/^\(bind .*\)$/# \1/' /etc/redis/redis.conf && \
     sed -i 's/^\(daemonize .*\)$/# \1/' /etc/redis/redis.conf && \
     sed -i 's/^\(dir .*\)$/# \1\ndir \/app\/data/' /etc/redis/redis.conf && \
     sed -i 's/^\(logfile .*\)$/# \1/' /etc/redis/redis.conf && \
-    apt-get remove --purge curl && apt-get autoremove -qq && apt-get clean && rm -rf /usr/share/doc /usr/share/man /var/log/* /tmp/*
+    apt-get -qy remove --purge curl && apt-get autoremove -qq && apt-get clean && rm -rf /usr/share/doc /usr/share/man /var/log/* /tmp/*
 
 # Create the folder structure for XO
 RUN mkdir -p /app/data

@@ -23,8 +23,7 @@ RUN curl -o /usr/local/bin/n https://raw.githubusercontent.com/visionmedia/n/mas
 COPY supervisord.conf /etc/supervisor/supervisord.conf
 
 # Edit redis config, then cleanup apt, 
-RUN sed -i 's/^\(bind .*\)$/# \1/' /etc/redis/redis.conf && \
-    sed -i 's/^\(daemonize .*\)$/# \1/' /etc/redis/redis.conf && \
+RUN sed -i 's/^\(daemonize .*\)$/# \1/' /etc/redis/redis.conf && \
     sed -i 's/^\(dir .*\)$/# \1\ndir \/app\/data/' /etc/redis/redis.conf && \
     sed -i 's/^\(logfile .*\)$/# \1/' /etc/redis/redis.conf && \
     apt-get -qy remove --purge curl && apt-get autoremove -qq && apt-get clean && rm -rf /usr/share/doc /usr/share/man /var/log/* /tmp/*

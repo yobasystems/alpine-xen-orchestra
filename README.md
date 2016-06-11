@@ -1,12 +1,15 @@
 # docker-xo
 
-Simple docker file to build an up-to-date Xen Orchestra container.
+Simple docker file to build an up-to-date Xen Orchestra container, based on Alpine Linux.
 
 # Run it!
 
 ## To forward all external traffic from port 80 to the container’s port 8080
 `docker run -p 0.0.0.0:80:8080 adamant/xen-orchestra`
 
+
+# Debian
+ A version of this container that is based on Debian Jessie can be found in the debian branch, or on dockerhub at adamant/xen-orchestra:debian
 
 # Notes
 

@@ -1,6 +1,4 @@
-FROM debian:jessie
-
-ENV DEBIAN_FRONTEND noninteractive
+FROM adamant/nodejs-alpine
 
 MAINTAINER Adam Dodman <adam.dodman@gmx.com>
 
@@ -12,23 +10,10 @@ MAINTAINER Adam Dodman <adam.dodman@gmx.com>
 #
 
 # Install requirements
-RUN apt-get -q update && \
-    apt-get -qy install build-essential redis-server libpng-dev git python-minimal curl supervisor
+RUN apk update && \
+    apk add --no-cache build-base redis git curl supervisor libstdc++ make gcc g++ libpng-dev
 
-# Install nodeJS
-RUN curl -o /usr/local/bin/n https://raw.githubusercontent.com/visionmedia/n/master/bin/n && \
-        chmod +x /usr/local/bin/n && n stable
-
-# Setup Supervisor to manage the application process
-COPY supervisord.conf /etc/supervisor/supervisord.conf
-
-# Edit redis config, then cleanup apt, 
-RUN sed -i 's/^\(daemonize .*\)$/# \1/' /etc/redis/redis.conf && \
-    sed -i 's/^\(dir .*\)$/# \1\ndir \/app\/data/' /etc/redis/redis.conf && \
-    sed -i 's/^\(logfile .*\)$/# \1/' /etc/redis/redis.conf && \
-    apt-get -qy remove --purge curl && apt-get autoremove -qq && apt-get clean && rm -rf /usr/share/doc /usr/share/man /var/log/* /tmp/*
-
-# Create the folder structure for XO
+#Create the folder structure for XO
 RUN mkdir -p /app/data
 
 WORKDIR /app
@@ -40,10 +25,20 @@ RUN git clone -b stable http://github.com/vatesfr/xo-server && \
 
 # Build XO
 RUN cd xo-server/ && npm install && npm run build && cd ..
-RUN cd xo-web/ && npm install && npm run build
+RUN cd xo-web/ && npm install && npm run build && cd ..
 
 # Add configuration
 ADD config.yaml /app/xo-server/.xo-server.yaml
+
+# Setup Supervisor to manage the application process
+COPY supervisord.conf /etc/supervisord.conf
+
+#Edit redis config, then general cleanup
+RUN sed -i 's/^\(daemonize .*\)$/# \1/' /etc/redis.conf && \
+    sed -i 's/^\(dir .*\)$/# \1\ndir \/app\/data/' /etc/redis.conf && \
+    sed -i 's/^\(logfile .*\)$/# \1/' /etc/redis.conf && \
+    mv /app/xo-web/dist /app && rm -rf /app/xo-web && mv /app/dist /app/xo-web &&\ #Get rid of all the build files for xo-web, we dont need em!
+    apk del --no-cache build-base git curl make gcc g++ libpng-dev
 
 EXPOSE 8080
 VOLUME /app/data

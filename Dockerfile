@@ -37,7 +37,7 @@ COPY supervisord.conf /etc/supervisord.conf
 RUN sed -i 's/^\(daemonize .*\)$/# \1/' /etc/redis.conf && \
     sed -i 's/^\(dir .*\)$/# \1\ndir \/app\/data/' /etc/redis.conf && \
     sed -i 's/^\(logfile .*\)$/# \1/' /etc/redis.conf && \
-    mv /app/xo-web/dist /app && rm -rf /app/xo-web && mv /app/dist /app/xo-web &&\ #Get rid of all the build files for xo-web, we dont need em!
+    mv /app/xo-web/dist /app && rm -rf /app/xo-web && mv /app/dist /app/xo-web &&\
     apk del --no-cache build-base git curl make gcc g++ libpng-dev
 
 EXPOSE 8080

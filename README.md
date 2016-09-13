@@ -1,20 +1,41 @@
-# docker-xo
+# Xen Orchestra Docker image running on Alpine Linux
 
-Simple docker file to build an up-to-date Xen Orchestra container, based on Alpine Linux.
+[![Docker Layers](https://img.shields.io/badge/docker%20layers-11-blue.svg?maxAge=2592000?style=flat-square)](https://hub.docker.com/r/yobasystems/alpine-xen-orchestra/) [![Docker Size](https://img.shields.io/badge/docker%20size-17.1%20MB-blue.svg?maxAge=2592000?style=flat-square)](https://hub.docker.com/r/yobasystems/alpine-xen-orchestra/) [![Docker Stars](https://img.shields.io/docker/stars/yobasystems/alpine-xen-orchestra.svg?maxAge=2592000?style=flat-square)](https://hub.docker.com/r/yobasystems/alpine-xen-orchestra/) [![Docker Pulls](https://img.shields.io/docker/pulls/yobasystems/alpine-xen-orchestra.svg?maxAge=2592000?style=flat-square)](https://hub.docker.com/r/yobasystems/alpine-xen-orchestra/)
 
-# Run it!
+[![Alpine Version](https://img.shields.io/badge/alpine%20version-v3.4-green.svg?maxAge=2592000?style=flat-square)](http://alpinelinux.org/) [![Xen Orchestra Version](https://img.shields.io/badge/xo%20version-v5.2-green.svg?maxAge=2592000?style=flat-square)](http://nginx.org/en/)
 
-## To forward all external traffic from port 80 to the container’s port 8080
-`docker run -p 0.0.0.0:80:8080 adamant/xen-orchestra`
+
+
+This Docker image [(yobasystems/alpine-xen-orchestra)](https://hub.docker.com/r/yobasystems/alpine-xen-orchestra/) is based on the minimal [Alpine Linux](http://alpinelinux.org/)  using the 5.2 version of [Xen Orchestra](https://xen-orchestra.com/).
+
+## Features
+
+  * Minimal size only 17.1 MB and only 11 layers
+  * Memory usage is minimal on a simple install
+  * Xen Orchestra version 5.2
+  * Memory usage is very small on a simple install.
+
+
+## Creating an instance
+
+
+## Getting Started
+
+To forward all external traffic from port 80 to the container’s port 8080
+
+```sh
+$ docker run -d --name xen-orchestra -p 80:8080 yobasystems/alpine-xen-orchestra
+```
+
+Point your browser to `http://host-ip`.
+
+## Environment Variables:
+
+
+### Main Xen parameters:
+* `URL`: specify the url with http:// or https://
+
 
 
 # Debian
  A version of this container that is based on Debian Jessie can be found in the debian branch, or on dockerhub at adamant/xen-orchestra:debian
-
-# Notes
-
-In theory, with the new XO 4.X, it is possible to update the code through the web interface so this image might still be relevant in the future.
-
-Since all the other images on the hub were for older versions of XO, I adapted one of them (sammcj & jpoa) to match the newest version (4.17 as of 9/6/16).
-
-Nothing fancy here, just getting the needed dependencies and code from the sources and building the project (check the docker file).

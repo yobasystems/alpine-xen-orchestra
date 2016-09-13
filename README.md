@@ -11,9 +11,8 @@ This Docker image [(yobasystems/alpine-xen-orchestra)](https://hub.docker.com/r/
 ## Features
 
   * Minimal size only 17.1 MB and only 11 layers
-  * Memory usage is minimal on a simple install
+  * Memory usage is minimal on a simple install rather than debian
   * Xen Orchestra version 5.2
-  * Memory usage is very small on a simple install.
 
 
 ## Creating an instance
@@ -33,9 +32,5 @@ Point your browser to `http://host-ip`.
 
 
 ### Main Xen parameters:
-* `URL`: specify the url with http:// or https://
 
-
-
-# Debian
- A version of this container that is based on Debian Jessie can be found in the debian branch, or on dockerhub at adamant/xen-orchestra:debian
+* Check the config.yaml file for options, or leave for defaults.

@@ -5,7 +5,6 @@
 [![Alpine Version](https://img.shields.io/badge/alpine%20version-v3.4-green.svg?maxAge=2592000?style=flat-square)](http://alpinelinux.org/) [![Xen Orchestra Version](https://img.shields.io/badge/xo%20version-v5.5.2-green.svg?maxAge=2592000?style=flat-square)](https://xen-orchestra.com/)
 
 
-
 This Docker image [(yobasystems/alpine-xen-orchestra)](https://hub.docker.com/r/yobasystems/alpine-xen-orchestra/) is based on the minimal [Alpine Linux](http://alpinelinux.org/) using the 5.5.2 version of [Xen Orchestra](https://xen-orchestra.com/).
 
 ## Features

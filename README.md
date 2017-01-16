@@ -2,16 +2,16 @@
 
 [![Docker Layers](https://img.shields.io/badge/docker%20layers-9-blue.svg?maxAge=2592000?style=flat-square)](https://hub.docker.com/r/yobasystems/alpine-xen-orchestra/) [![Docker Size](https://img.shields.io/badge/docker%20size-185%20MB-blue.svg?maxAge=2592000?style=flat-square)](https://hub.docker.com/r/yobasystems/alpine-xen-orchestra/) [![Docker Stars](https://img.shields.io/docker/stars/yobasystems/alpine-xen-orchestra.svg?maxAge=2592000?style=flat-square)](https://hub.docker.com/r/yobasystems/alpine-xen-orchestra/) [![Docker Pulls](https://img.shields.io/docker/pulls/yobasystems/alpine-xen-orchestra.svg?maxAge=2592000?style=flat-square)](https://hub.docker.com/r/yobasystems/alpine-xen-orchestra/)
 
-[![Alpine Version](https://img.shields.io/badge/alpine%20version-v3.4-green.svg?maxAge=2592000?style=flat-square)](http://alpinelinux.org/) [![Xen Orchestra Version](https://img.shields.io/badge/xo%20version-v5.5.2-green.svg?maxAge=2592000?style=flat-square)](https://xen-orchestra.com/)
+[![Alpine Version](https://img.shields.io/badge/alpine%20version-v3.4-green.svg?maxAge=2592000?style=flat-square)](http://alpinelinux.org/) [![Xen Orchestra Version](https://img.shields.io/badge/xo%20version-v5.5.4-green.svg?maxAge=2592000?style=flat-square)](https://xen-orchestra.com/)
 
 
-This Docker image [(yobasystems/alpine-xen-orchestra)](https://hub.docker.com/r/yobasystems/alpine-xen-orchestra/) is based on the minimal [Alpine Linux](http://alpinelinux.org/) using the 5.5.2 version of [Xen Orchestra](https://xen-orchestra.com/).
+This Docker image [(yobasystems/alpine-xen-orchestra)](https://hub.docker.com/r/yobasystems/alpine-xen-orchestra/) is based on the minimal [Alpine Linux](http://alpinelinux.org/) using the 5.5.4 version of [Xen Orchestra](https://xen-orchestra.com/).
 
 ## Features
 
   * Minimal size only 185 MB and only 9 layers
   * Memory usage is minimal rather than using debian OS
-  * Xen Orchestra version 5.5.2
+  * Xen Orchestra version 5.5.4
 
 
 ## Creating an instance

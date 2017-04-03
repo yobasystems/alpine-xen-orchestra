@@ -2,7 +2,7 @@ FROM yobasystems/alpine-nodejs:armhf-min
 MAINTAINER Dominic Taylor <dominic@yobasystems.co.uk>
 
 RUN apk update && \
-    apk add --no-cache build-base redis git curl supervisor libstdc++ make gcc g++ libpng-dev
+    apk add --no-cache build-base redis git curl supervisor libstdc++ make gcc g++ libpng-dev yarn
 
 RUN mkdir -p /app/data
 

@@ -2,7 +2,7 @@ FROM yobasystems/alpine-nodejs:min
 MAINTAINER Dominic Taylor <dominic@yobasystems.co.uk>
 
 RUN apk update && \
-    apk add --no-cache build-base redis git curl supervisor libstdc++ make gcc g++ libpng-dev yarn
+    apk add --no-cache build-base redis git curl supervisor libstdc++ make gcc g++ libpng-dev
 
 RUN echo -e 'http://dl-cdn.alpinelinux.org/alpine/edge/main\nhttp://dl-cdn.alpinelinux.org/alpine/edge/community\nhttp://dl-cdn.alpinelinux.org/alpine/edge/testing' > /etc/apk/repositories && \
     apk update && apk add --no-cache yarn

@@ -11,8 +11,8 @@ RUN mkdir -p /app/data
 
 WORKDIR /app
 
-RUN git clone -b stable http://github.com/vatesfr/xo-server && \
-    git clone -b stable http://github.com/vatesfr/xo-web && \
+RUN git clone -b stable https://github.com/vatesfr/xo-server && \
+    git clone -b stable https://github.com/vatesfr/xo-web && \
     rm -rf xo-server/.git xo-web/.git xo-server/sample.config.yaml
 
 RUN cd xo-server/ && npm install && npm run build && cd .. && \

@@ -12,7 +12,7 @@ WORKDIR /app
 
 RUN git clone -b stable https://github.com/vatesfr/xo-server && \
     git clone -b stable https://github.com/vatesfr/xo-web && \
-    rm -rf xo-server/.git xo-web/.git xo-server/sample.config.yaml
+    rm -rf xo-server/.git xo-web/.git xo-server/sample.config.yaml && \
     cd xo-server/ && npm install && npm run build && cd .. && \
     cd xo-web/ && npm install && npm run build && cd ..
 

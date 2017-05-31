@@ -8,9 +8,6 @@ RUN apk update && \
 
 RUN mkdir -p /app/data
 
-ADD files/config.yaml /app/xo-server/.xo-server.yaml
-ADD files/supervisord.conf /etc/supervisord.conf
-
 WORKDIR /app
 
 RUN git clone -b stable https://github.com/vatesfr/xo-server && \
@@ -18,6 +15,10 @@ RUN git clone -b stable https://github.com/vatesfr/xo-server && \
     rm -rf xo-server/.git xo-web/.git xo-server/sample.config.yaml && \
     cd xo-server/ && yarn && yarn start && cd .. && \
     cd xo-web/ && yarn && cd ..
+
+
+ADD files/config.yaml /app/xo-server/.xo-server.yaml
+ADD files/supervisord.conf /etc/supervisord.conf
 
 RUN sed -i 's/daemonize yes/daemonize no/' /etc/redis.conf && \
     sed -i 's/dir \/var\/lib\/redis/dir \/app\/data/' /etc/redis.conf && \

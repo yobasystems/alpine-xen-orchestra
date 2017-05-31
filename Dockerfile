@@ -13,12 +13,15 @@ WORKDIR /app
 RUN git clone -b stable https://github.com/vatesfr/xo-server && \
     git clone -b stable https://github.com/vatesfr/xo-web && \
     rm -rf xo-server/.git xo-web/.git xo-server/sample.config.yaml && \
-    cd xo-server/ && yarn && yarn start && cd .. && \
+    cd xo-server/ && yarn && cd .. && \
     cd xo-web/ && yarn && cd ..
 
 
 ADD files/config.yaml /app/xo-server/.xo-server.yaml
 ADD files/supervisord.conf /etc/supervisord.conf
+
+RUN cd /app/xo-server/ && yarn start && yarn global add forever && \
+    forever start /app/xo-server
 
 RUN sed -i 's/daemonize yes/daemonize no/' /etc/redis.conf && \
     sed -i 's/dir \/var\/lib\/redis/dir \/app\/data/' /etc/redis.conf && \

@@ -26,7 +26,7 @@
 # identifier.
 #
 # Default: undefined
-#user: 'nobody'
+user: 'xenorchestra'
 
 # Group to run XO-Server as.
 #
@@ -68,7 +68,7 @@ http:
 
 # Connection to the Redis server.
 redis:
-    # Syntax: tcp://[db[:password]@]hostname[:port]
+    uri: "redis://redis:6379"
     #
     # Default: tcp://localhost:6379
     #uri: ''

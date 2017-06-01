@@ -2,24 +2,24 @@
 
 [![Docker Layers](https://img.shields.io/badge/docker%20layers-9-blue.svg?maxAge=2592000?style=flat-square)](https://hub.docker.com/r/yobasystems/alpine-xen-orchestra/) [![Docker Size](https://img.shields.io/badge/docker%20size-198%20MB-blue.svg?maxAge=2592000?style=flat-square)](https://hub.docker.com/r/yobasystems/alpine-xen-orchestra/) [![Docker Stars](https://img.shields.io/docker/stars/yobasystems/alpine-xen-orchestra.svg?maxAge=2592000?style=flat-square)](https://hub.docker.com/r/yobasystems/alpine-xen-orchestra/) [![Docker Pulls](https://img.shields.io/docker/pulls/yobasystems/alpine-xen-orchestra.svg?maxAge=2592000?style=flat-square)](https://hub.docker.com/r/yobasystems/alpine-xen-orchestra/)
 
-[![Alpine Version](https://img.shields.io/badge/alpine%20version-v3.5-green.svg?maxAge=2592000?style=flat-square)](http://alpinelinux.org/) [![Xen Orchestra Version](https://img.shields.io/badge/xo%20version-v5.7.0-green.svg?maxAge=2592000?style=flat-square)](https://xen-orchestra.com/)
+[![Alpine Version](https://img.shields.io/badge/alpine%20version-v3.5-green.svg?maxAge=2592000?style=flat-square)](http://alpinelinux.org/) [![Xen Orchestra Version](https://img.shields.io/badge/xo%20version-v5.9.0-green.svg?maxAge=2592000?style=flat-square)](https://xen-orchestra.com/)
 
 
-This Docker image [(yobasystems/alpine-xen-orchestra)](https://hub.docker.com/r/yobasystems/alpine-xen-orchestra/) is based on the minimal [Alpine Linux](http://alpinelinux.org/) using the 5.7.0 version of [Xen Orchestra](https://xen-orchestra.com/).
+This Docker image [(yobasystems/alpine-xen-orchestra)](https://hub.docker.com/r/yobasystems/alpine-xen-orchestra/) is based on the minimal [Alpine Linux](http://alpinelinux.org/) using the 5.9.0 version of [Xen Orchestra](https://xen-orchestra.com/).
 
 ## Features
 
   * Minimal size only 198 MB and only 9 layers
   * Memory usage is minimal on Alpine rather than using Debian
-  * Xen Orchestra version 5.7.0
+  * Xen Orchestra version 5.9.0
   * Armv7 (armhf) version with ```:armhf``` tag
 
 ## Tags
 
-  * ```:latest``` latest nginx & alpine
+  * ```:latest``` latest xen-orchestra on alpine
   * ```:master``` master branch usually inline with latest
-  * ```:v0.0.0``` version number related to nginx version
-  * ```:armhf``` Armv7 based on latest tag but arm architecture
+  * ```:v0.0.0``` version number related to xen-orchestra version
+  * ```:armhf``` Armv7 based on latest tag but built for arm architecture
 
 ## Creating an instance
 
@@ -44,13 +44,25 @@ Point your browser to `http://host-ip`.
 ## Docker Compose example:
 
 ```yalm
-webapp:
-  image: yobasystems/alpine-xen-orchestra:latest
-  expose:
-    - "8080"
-  volumes:
-    - /data/xen-orchestra:/app/data
-  restart: always
+version: '2'
+services:
+    xen-orchestra:
+        image: yobasystems/alpine-xen-orchestra:latest
+        container_name: xoa
+        ports:
+            - "8000:8080"
+        depends_on:
+            - redis
+        environment:
+            - NODE_ENV=production
+        volumes:
+            - /data/xoa/server:/app/data
+    redis:
+        container_name: xoa-redis
+        image: redis:alpine
+        command: redis-server --appendonly yes
+        volumes:
+            - /data/xoa/redis:/data
 ```
 
 ## Source Repository

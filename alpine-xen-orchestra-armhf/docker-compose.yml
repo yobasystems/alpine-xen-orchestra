@@ -1,0 +1,19 @@
+version: '2'
+services:
+    xen-orchestra:
+        image: yobasystems/alpine-xen-orchestra:armhf
+        container_name: xoa
+        ports:
+            - "8000:8080"
+        depends_on:
+            - redis
+        environment:
+            - NODE_ENV=production
+        volumes:
+            - /data/xoa/server:/app/data
+    redis:
+        container_name: xoa-redis
+        image: armhf/redis:3.2
+        command: redis-server --appendonly yes
+        volumes:
+            - /data/xoa/redis:/data

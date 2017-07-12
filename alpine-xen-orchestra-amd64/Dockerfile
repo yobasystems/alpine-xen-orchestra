@@ -6,7 +6,7 @@ ENV USER=xenorchestra USER_HOME=/app
 WORKDIR /app
 
 RUN apk update && \
-    apk add --no-cache build-base git curl python libstdc++ make gcc g++ libpng-dev && \
+    apk add --no-cache build-base git curl python libstdc++ make gcc g++ libpng-dev nodejs-npm && \
     echo -e 'http://dl-cdn.alpinelinux.org/alpine/edge/main\nhttp://dl-cdn.alpinelinux.org/alpine/edge/community\nhttp://dl-cdn.alpinelinux.org/alpine/edge/testing' > /etc/apk/repositories && \
     apk update && apk add --no-cache yarn && \
     git clone -b stable https://github.com/vatesfr/xo-server && \

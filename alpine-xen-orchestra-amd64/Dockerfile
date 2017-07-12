@@ -1,5 +1,5 @@
-FROM yobasystems/alpine-nodejs:armhf-min
-LABEL maintainer "Dominic Taylor <dominic@yobasystems.co.uk>" architecture="ARM32v7/armhf"
+FROM yobasystems/alpine-nodejs:amd64-min
+LABEL maintainer "Dominic Taylor <dominic@yobasystems.co.uk>" architecture="AMD64/x86_64"
 
 ENV USER=xenorchestra USER_HOME=/app
 

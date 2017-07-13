@@ -17,13 +17,13 @@ RUN apk update && \
     yarn cache clean && \
     mv /app/xo-web/dist /app && rm -rf /app/xo-web && mv /app/dist /app/xo-web && \
     apk del --no-cache build-base git curl python make gcc g++ libpng-dev && \
-    rm -rf /tmp/* /var/cache/apk/* && \
-    addgroup -S xenorchestra && adduser -S -g xenorchestra xenorchestra
+    rm -rf /tmp/* /var/cache/apk/*
 
 ADD files/config.yaml /app/xo-server/.xo-server.yaml
 ADD files/entrypoint.sh /
 
-RUN chmod +x /entrypoint.sh
+RUN addgroup -S xenorchestra && adduser -S -g xenorchestra xenorchestra && \
+    chmod +x /entrypoint.sh
 
 ENV USER=xenorchestra USER_HOME=/app
 

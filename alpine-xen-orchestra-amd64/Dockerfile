@@ -1,13 +1,14 @@
 FROM yobasystems/alpine-nodejs:amd64-min
 LABEL maintainer "Dominic Taylor <dominic@yobasystems.co.uk>" architecture="AMD64/x86_64"
 
-WORKDIR /app
-
 RUN apk update && \
     apk add --no-cache build-base git curl python libstdc++ make gcc g++ libpng-dev nodejs-npm && \
     echo -e 'http://dl-cdn.alpinelinux.org/alpine/edge/main\nhttp://dl-cdn.alpinelinux.org/alpine/edge/community\nhttp://dl-cdn.alpinelinux.org/alpine/edge/testing' > /etc/apk/repositories && \
-    apk update && apk add --no-cache yarn && \
-    git clone -b stable https://github.com/vatesfr/xo-server && \
+    apk update && apk add --no-cache yarn
+
+WORKDIR /app
+
+RUN git clone -b stable https://github.com/vatesfr/xo-server && \
     git clone -b stable https://github.com/vatesfr/xo-web && \
     rm -rf xo-server/.git xo-web/.git xo-server/sample.config.yaml && \
     yarn global add node-gyp && \
@@ -22,12 +23,12 @@ RUN apk update && \
 ADD files/config.yaml /app/xo-server/.xo-server.yaml
 ADD files/entrypoint.sh /
 
-RUN addgroup -S xenorchestra && adduser -S -g xenorchestra xenorchestra && \
-    chmod +x /entrypoint.sh
-
-ENV USER=xenorchestra USER_HOME=/app
+RUN chmod +x /entrypoint.sh && \
+    addgroup -S xenorchestra && adduser -S -g xenorchestra xenorchestra
 
 EXPOSE 8080
+
+ENV USER=xenorchestra USER_HOME=/app
 
 VOLUME /app/data
 

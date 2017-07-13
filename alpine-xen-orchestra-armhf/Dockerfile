@@ -1,8 +1,6 @@
 FROM yobasystems/alpine-nodejs:armhf-min
 LABEL maintainer "Dominic Taylor <dominic@yobasystems.co.uk>" architecture="ARM32v7/armhf"
 
-ENV USER=xenorchestra USER_HOME=/app
-
 WORKDIR /app
 
 RUN apk update && \
@@ -26,6 +24,8 @@ ADD files/config.yaml /app/xo-server/.xo-server.yaml
 ADD files/entrypoint.sh /
 
 RUN chmod +x /entrypoint.sh
+
+ENV USER=xenorchestra USER_HOME=/app
 
 EXPOSE 8080
 

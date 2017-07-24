@@ -15,7 +15,6 @@ RUN git clone -b stable https://github.com/vatesfr/xo-server && \
     cd /app/xo-server && yarn && yarn run build && yarn clean && \
     cd /app/xo-web && yarn && yarn run build && yarn clean && \
     yarn global remove node-gyp && \
-    yarn cache clean && \
     mv /app/xo-web/dist /app && rm -rf /app/xo-web && mv /app/dist /app/xo-web && \
     apk del --no-cache build-base git curl python make gcc g++ libpng-dev && \
     rm -rf /tmp/* /var/cache/apk/*

@@ -42,11 +42,9 @@ RUN echo $'\
     apk update -U && \
     apk add -U libstdc++ util-linux yarn@edge && \
     rm -rf /tmp/* /var/cache/apk/*
-
-WORKDIR /app
-
-COPY --from=server-builder /app/xo-server ./xo-server
-COPY --from=web-builder /app/xo-web/dist ./xo-web
+    
+COPY --from=server-builder /app/xo-server /app/xo-server
+COPY --from=web-builder /app/xo-web/dist /app/xo-web
 
 ADD files/config.yaml /etc/xo-server/config.yaml
 

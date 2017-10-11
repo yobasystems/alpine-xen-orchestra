@@ -46,7 +46,7 @@ RUN echo $'\
 COPY --from=server-builder /app/xo-server /app/xo-server
 COPY --from=web-builder /app/xo-web/dist /app/xo-web
 
-ADD files/config.yaml /etc/xo-server/config.yaml
+COPY files/config.yaml /etc/xo-server/config.yaml
 
 RUN addgroup -S $USER && adduser -S -g $USER $USER && \
     mkdir -p /app/data && \

@@ -48,13 +48,13 @@ COPY --from=web-builder /app/xo-web/dist /app/xo-web
 
 COPY files/config.yaml /etc/xo-server/config.yaml
 
+VOLUME /app/data
+
 RUN addgroup -S $USER && adduser -S -g $USER $USER && \
     mkdir -p /app/data && \
-    chown -R $USER:$USER /app
+    chown -R $USER:$USER /app/data
 
 EXPOSE 8080
-
-VOLUME /app/data
 
 USER xenorchestra
 

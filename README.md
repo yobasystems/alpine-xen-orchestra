@@ -54,7 +54,7 @@ A redis container is required, e.g redis:alpine to be linked to the xen orchestr
 To forward all external traffic from port 80 to the container’s port 8080
 
 ```sh
-$ docker run -d --name xen-orchestra -p 80:8080 yobasystems/alpine-xen-orchestra
+$ docker run -d --name xen-orchestra -p 80:8080 yobasystems/alpine-xen-orchestra yarn start
 ```
 
 Point your browser to `http://host-ip`.
@@ -67,6 +67,7 @@ services:
     xen-orchestra:
         image: yobasystems/alpine-xen-orchestra:latest
         container_name: xoa
+        command: yarn start
         ports:
             - "8000:8080"
         depends_on:

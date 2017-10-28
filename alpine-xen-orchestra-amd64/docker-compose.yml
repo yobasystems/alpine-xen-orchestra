@@ -2,6 +2,7 @@ version: '2'
 services:
     xen-orchestra:
         image: yobasystems/alpine-xen-orchestra:latest
+        command: yarn start
         container_name: xoa
         ports:
             - "8000:8080"

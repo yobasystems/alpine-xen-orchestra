@@ -45,19 +45,17 @@ RUN echo $'\
     
 COPY --from=server-builder /app/xo-server /app/xo-server
 COPY --from=web-builder /app/xo-web/dist /app/xo-web
-
 COPY files/config.yaml /etc/xo-server/config.yaml
+
+COPY files/entrypoint.sh /entrypoint.sh
 
 VOLUME /app/data
 
 RUN addgroup -S $USER && adduser -S -g $USER $USER && \
-    mkdir -p /app/data && \
-    chown -R $USER:$USER /app/data
+    chmod +x /entrypoint.sh
 
 EXPOSE 8080
 
-USER xenorchestra
+USER root
 
-WORKDIR /app/xo-server
-
-CMD ["yarn", "start"]
+ENTRYPOINT ["/entrypoint.sh"]

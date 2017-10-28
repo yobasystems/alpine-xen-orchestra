@@ -1,8 +1,7 @@
 #!/bin/sh
 set -e
 
-# storge directory and fix perms
-mkdir -p /app/data
+# fix permissions on data folder
 chown -R xenorchestra:xenorchestra /app/data
 
 # start App

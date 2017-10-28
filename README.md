@@ -1,13 +1,13 @@
 # Xen Orchestra Docker image running on Alpine Linux
 
-[![Docker Layers](https://img.shields.io/badge/docker%20layers-9-blue.svg?maxAge=2592000?style=flat-square)](https://hub.docker.com/r/yobasystems/alpine-xen-orchestra/) [![Docker Size](https://img.shields.io/badge/docker%20size-198%20MB-blue.svg?maxAge=2592000?style=flat-square)](https://hub.docker.com/r/yobasystems/alpine-xen-orchestra/) [![Docker Stars](https://img.shields.io/docker/stars/yobasystems/alpine-xen-orchestra.svg?maxAge=2592000?style=flat-square)](https://hub.docker.com/r/yobasystems/alpine-xen-orchestra/) [![Docker Pulls](https://img.shields.io/docker/pulls/yobasystems/alpine-xen-orchestra.svg?maxAge=2592000?style=flat-square)](https://hub.docker.com/r/yobasystems/alpine-xen-orchestra/)
+[![Docker Layers](https://img.shields.io/badge/docker%20layers-9-blue.svg?maxAge=2592000?style=flat-square)](https://hub.docker.com/r/bastienm/alpine-xoa/) [![Docker Size](https://img.shields.io/badge/docker%20size-198%20MB-blue.svg?maxAge=2592000?style=flat-square)](https://hub.docker.com/r/bastienm/alpine-xoa/) [![Docker Stars](https://img.shields.io/docker/stars/bastienm/xoa.svg?maxAge=2592000?style=flat-square)](https://hub.docker.com/r/bastienm/alpine-xoa/) [![Docker Pulls](https://img.shields.io/docker/pulls/bastienm/alpine-xoa.svg?maxAge=2592000?style=flat-square)](https://hub.docker.com/r/bastienm/alpine-xoa/)
 
-[![Alpine Version](https://img.shields.io/badge/alpine%20version-v3.6.2-green.svg?maxAge=2592000?style=flat-square)](http://alpinelinux.org/) [![Xen Orchestra Version](https://img.shields.io/badge/xo%20version-v5.10.5-green.svg?maxAge=2592000?style=flat-square)](https://xen-orchestra.com/)
+[![Alpine Version](https://img.shields.io/badge/alpine%20version-v3.4.0-green.svg?maxAge=2592000?style=flat-square)](http://alpinelinux.org/) [![Xen Orchestra Version](https://img.shields.io/badge/xo%20version-v5.13.0-green.svg?maxAge=2592000?style=flat-square)](https://xen-orchestra.com/)
 
 This Docker image [(yobasystems/alpine-xen-orchestra)](https://hub.docker.com/r/yobasystems/alpine-xen-orchestra/) is based on the minimal [Alpine Linux](http://alpinelinux.org/) with [Xen Orchestra](https://xen-orchestra.com/).
 
-##### Alpine Version 3.6.2 (Released Jun 17, 2017)
-##### Xen Orchestra Version 5.10.5
+##### Alpine Version 3.4 (Released Apr 30, 2016)
+##### Xen Orchestra Version 5.13.0
 
 ----
 
@@ -54,7 +54,7 @@ A redis container is required, e.g redis:alpine to be linked to the xen orchestr
 To forward all external traffic from port 80 to the container’s port 8080
 
 ```sh
-$ docker run -d --name xen-orchestra -p 80:8080 yobasystems/alpine-xen-orchestra
+$ docker run -d --name xen-orchestra -p 80:8080 yobasystems/alpine-xen-orchestra yarn start
 ```
 
 Point your browser to `http://host-ip`.
@@ -67,6 +67,7 @@ services:
     xen-orchestra:
         image: yobasystems/alpine-xen-orchestra:latest
         container_name: xoa
+        command: yarn start
         ports:
             - "8000:8080"
         depends_on:

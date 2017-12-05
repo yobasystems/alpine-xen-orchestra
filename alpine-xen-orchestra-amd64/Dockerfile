@@ -1,9 +1,9 @@
-FROM node:6-alpine as server-builder
+FROM node:8.9.1-alpine as server-builder
 
 WORKDIR /app
 
 RUN apk update && \
-    apk add git build-base git curl python libstdc++ make gcc g++ libpng-dev && \
+    apk add git build-base git curl python libstdc++ make gcc g++ libpng-dev yarn && \
     yarn global add node-gyp index-modules
 
 RUN git clone -b stable https://github.com/vatesfr/xo-server && \
@@ -11,12 +11,12 @@ RUN git clone -b stable https://github.com/vatesfr/xo-server && \
 
 RUN cd xo-server && yarn
 
-FROM node:6-alpine as web-builder
+FROM node:8.9.1-alpine as web-builder
 
 WORKDIR /app
 
 RUN apk update && \
-    apk add git build-base git curl python libstdc++ make gcc g++ libpng-dev && \
+    apk add git build-base git curl python libstdc++ make gcc g++ libpng-dev yarn && \
     yarn global add node-gyp index-modules
 
 RUN git clone -b stable https://github.com/vatesfr/xo-web && \
@@ -24,19 +24,15 @@ RUN git clone -b stable https://github.com/vatesfr/xo-web && \
 
 RUN cd xo-web && yarn
 
-FROM node:6-alpine
+FROM node:8.9.1-alpine
 
 LABEL maintainer "Dominic Taylor <dominic@yobasystems.co.uk>" architecture="AMD64/x86_64" date="25-nov-2017"
 
 ENV USER=xenorchestra \
     USER_HOME=/app
 
-RUN echo $'\
-@edge http://dl-cdn.alpinelinux.org/alpine/edge/main\n\
-@edge http://dl-cdn.alpinelinux.org/alpine/edge/community\n\
-@edge http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories && \
-    apk update -U && \
-    apk add -U libstdc++ util-linux yarn@edge && \
+RUN apk update -U && \
+    apk add -U libstdc++ util-linux yarn && \
     rm -rf /tmp/* /var/cache/apk/*
 
 COPY --from=server-builder /app/xo-server /app/xo-server

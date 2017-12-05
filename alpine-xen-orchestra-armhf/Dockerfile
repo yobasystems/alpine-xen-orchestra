@@ -1,9 +1,9 @@
-FROM resin/raspberrypi2-alpine-node:6.10 as server-builder
+FROM resin/armhf-alpine-node:8.9-onbuild as server-builder
 
 WORKDIR /app
 
 RUN apk update && \
-    apk add git build-base git curl python libstdc++ make gcc g++ libpng-dev && \
+    apk add git build-base git curl python libstdc++ make gcc g++ libpng-dev yarn && \
     yarn global add node-gyp index-modules
 
 RUN git clone -b stable https://github.com/vatesfr/xo-server && \
@@ -11,12 +11,12 @@ RUN git clone -b stable https://github.com/vatesfr/xo-server && \
 
 RUN cd xo-server && yarn
 
-FROM resin/raspberrypi2-alpine-node:6.10 as web-builder
+FROM resin/armhf-alpine-node:8.9-onbuild as web-builder
 
 WORKDIR /app
 
 RUN apk update && \
-    apk add git build-base git curl python libstdc++ make gcc g++ libpng-dev && \
+    apk add git build-base git curl python libstdc++ make gcc g++ libpng-dev yarn && \
     yarn global add node-gyp index-modules
 
 RUN git clone -b stable https://github.com/vatesfr/xo-web && \
@@ -24,19 +24,15 @@ RUN git clone -b stable https://github.com/vatesfr/xo-web && \
 
 RUN cd xo-web && yarn
 
-FROM resin/raspberrypi2-alpine-node:6.10
+FROM resin/armhf-alpine-node:8.9-onbuild
 
 LABEL maintainer "Dominic Taylor <dominic@yobasystems.co.uk>" architecture="ARM32v7/armhf" date="26-nov-2017"
 
 ENV USER=xenorchestra \
     USER_HOME=/app
 
-RUN echo $'\
-@edge http://dl-cdn.alpinelinux.org/alpine/edge/main\n\
-@edge http://dl-cdn.alpinelinux.org/alpine/edge/community\n\
-@edge http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories && \
-    apk update -U && \
-    apk add -U libstdc++ util-linux yarn@edge && \
+RUN apk update -U && \
+    apk add -U libstdc++ util-linux yarn && \
     rm -rf /tmp/* /var/cache/apk/*
 
 COPY --from=server-builder /app/xo-server /app/xo-server

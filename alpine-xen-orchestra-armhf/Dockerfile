@@ -1,4 +1,4 @@
-FROM resin/armhf-alpine-node:8.9-onbuild as server-builder
+FROM resin/armhf-alpine-node:8.9 as server-builder
 
 WORKDIR /app
 
@@ -11,7 +11,7 @@ RUN git clone -b stable https://github.com/vatesfr/xo-server && \
 
 RUN cd xo-server && yarn
 
-FROM resin/armhf-alpine-node:8.9-onbuild as web-builder
+FROM resin/armhf-alpine-node:8.9 as web-builder
 
 WORKDIR /app
 
@@ -24,7 +24,7 @@ RUN git clone -b stable https://github.com/vatesfr/xo-web && \
 
 RUN cd xo-web && yarn
 
-FROM resin/armhf-alpine-node:8.9-onbuild
+FROM resin/armhf-alpine-node:8.9
 
 LABEL maintainer "Dominic Taylor <dominic@yobasystems.co.uk>" architecture="ARM32v7/armhf" date="26-nov-2017"
 

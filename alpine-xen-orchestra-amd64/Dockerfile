@@ -1,4 +1,4 @@
-FROM node:8.9.1-alpine as server-builder
+FROM node:9-alpine as server-builder
 
 WORKDIR /app
 
@@ -9,9 +9,9 @@ RUN apk update && \
 RUN git clone -b stable https://github.com/vatesfr/xo-server && \
     rm -rf xo-server/{.git,sample.config.yaml}
 
-RUN cd xo-server && yarn
+RUN cd xo-server && yarn && yarn build
 
-FROM node:8.9.1-alpine as web-builder
+FROM node:9-alpine as web-builder
 
 WORKDIR /app
 
@@ -20,11 +20,11 @@ RUN apk update && \
     yarn global add node-gyp index-modules
 
 RUN git clone -b stable https://github.com/vatesfr/xo-web && \
-    rm -rf xo-server/.git
+    rm -rf xo-web/.git
 
-RUN cd xo-web && yarn
+RUN cd xo-web && yarn && yarn build
 
-FROM node:8.9.1-alpine
+FROM node:9-alpine
 
 LABEL maintainer "Dominic Taylor <dominic@yobasystems.co.uk>" architecture="AMD64/x86_64" date="25-nov-2017"
 

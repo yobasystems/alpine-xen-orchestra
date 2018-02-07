@@ -6,5 +6,5 @@ mkdir -p /app/data
 chown -R xenorchestra:xenorchestra /app/data
 
 # start App
-cd /app/xo-server
+cd /app/xen-orchestra/packages/xo-server
 exec "$@"

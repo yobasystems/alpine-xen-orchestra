@@ -62,7 +62,7 @@ http:
 
   # List of files/directories which will be served.
   mounts:
-    '/': '/app/xo-web/'
+    '/': '../xo-web/dist/'
 
 #=====================================================================
 

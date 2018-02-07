@@ -1,4 +1,4 @@
-FROM resin/armhf-alpine-node:8.9 as server-builder
+FROM resin/armhf-alpine-node:9 as xoa-builder
 
 WORKDIR /app
 
@@ -6,27 +6,13 @@ RUN apk update && \
     apk add git build-base git curl python libstdc++ make gcc g++ libpng-dev yarn && \
     yarn global add node-gyp index-modules
 
-RUN git clone -b stable https://github.com/vatesfr/xo-server && \
-    rm -rf xo-server/{.git,sample.config.yaml}
+RUN git clone -b master https://github.com/vatesfr/xen-orchestra
 
-RUN cd xo-server && yarn
+RUN cd xen-orchestra && yarn && yarn build
 
-FROM resin/armhf-alpine-node:8.9 as web-builder
+FROM resin/armhf-alpine-node:9 
 
-WORKDIR /app
-
-RUN apk update && \
-    apk add git build-base git curl python libstdc++ make gcc g++ libpng-dev yarn && \
-    yarn global add node-gyp index-modules
-
-RUN git clone -b stable https://github.com/vatesfr/xo-web && \
-    rm -rf xo-server/.git
-
-RUN cd xo-web && yarn
-
-FROM resin/armhf-alpine-node:8.9
-
-LABEL maintainer "Dominic Taylor <dominic@yobasystems.co.uk>" architecture="ARM32v7/armhf" date="26-nov-2017"
+LABEL maintainer "Dominic Taylor <dominic@yobasystems.co.uk>" architecture="AMD64/x86_64" date="25-nov-2017"
 
 ENV USER=xenorchestra \
     USER_HOME=/app
@@ -35,9 +21,8 @@ RUN apk update -U && \
     apk add -U libstdc++ util-linux yarn && \
     rm -rf /tmp/* /var/cache/apk/*
 
-COPY --from=server-builder /app/xo-server /app/xo-server
-COPY --from=web-builder /app/xo-web/dist /app/xo-web
-COPY files/config.yaml /etc/xo-server/config.yaml
+COPY --from=xoa-builder /app/xen-orchestra /app/xen-orchestra
+COPY files/config.yaml /app/xen-orchestra/packages/xo-server/config.yaml
 
 COPY files/entrypoint.sh /entrypoint.sh
 

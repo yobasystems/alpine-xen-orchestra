@@ -1,4 +1,4 @@
-FROM node:8.9.1-alpine as server-builder
+FROM node:9-alpine as xoa-builder
 
 WORKDIR /app
 
@@ -6,25 +6,11 @@ RUN apk update && \
     apk add git build-base git curl python libstdc++ make gcc g++ libpng-dev yarn && \
     yarn global add node-gyp index-modules
 
-RUN git clone -b stable https://github.com/vatesfr/xo-server && \
-    rm -rf xo-server/{.git,sample.config.yaml}
+RUN git clone -b master https://github.com/vatesfr/xen-orchestra
 
-RUN cd xo-server && yarn
+RUN cd xen-orchestra && yarn && yarn build
 
-FROM node:8.9.1-alpine as web-builder
-
-WORKDIR /app
-
-RUN apk update && \
-    apk add git build-base git curl python libstdc++ make gcc g++ libpng-dev yarn && \
-    yarn global add node-gyp index-modules
-
-RUN git clone -b stable https://github.com/vatesfr/xo-web && \
-    rm -rf xo-server/.git
-
-RUN cd xo-web && yarn
-
-FROM node:8.9.1-alpine
+FROM node:9-alpine
 
 LABEL maintainer "Dominic Taylor <dominic@yobasystems.co.uk>" architecture="AMD64/x86_64" date="25-nov-2017"
 
@@ -35,9 +21,8 @@ RUN apk update -U && \
     apk add -U libstdc++ util-linux yarn && \
     rm -rf /tmp/* /var/cache/apk/*
 
-COPY --from=server-builder /app/xo-server /app/xo-server
-COPY --from=web-builder /app/xo-web/dist /app/xo-web
-COPY files/config.yaml /etc/xo-server/config.yaml
+COPY --from=xoa-builder /app/xen-orchestra /app/xen-orchestra
+COPY files/config.yaml /app/xen-orchestra/packages/xo-server/config.yaml
 
 COPY files/entrypoint.sh /entrypoint.sh
 

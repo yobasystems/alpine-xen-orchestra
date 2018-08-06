@@ -1,4 +1,4 @@
-FROM mhart/alpine-node:9 as xoa-builder
+FROM mhart/alpine-node:latest as xoa-builder
 
 WORKDIR /app
 

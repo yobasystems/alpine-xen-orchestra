@@ -4,13 +4,14 @@ WORKDIR /app
 
 RUN apk update && \
     apk add bash git build-base git curl python libstdc++ make gcc g++ libpng-dev yarn && \
-    yarn global add node-gyp index-modules
+    yarn global add node-gyp index-modules && \
+    yarn install
 
 RUN git clone -b master https://github.com/vatesfr/xen-orchestra
 
 COPY files/config.yaml xen-orchestra/packages/xo-server/.xo-server.yaml
 
-RUN cd /app/xen-orchestra &&\
+RUN cd /app/xen-orchestra && \
     yarn && yarn build
 
 FROM node:8.11-alpine

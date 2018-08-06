@@ -2,12 +2,12 @@
 
 [![Docker Layers](https://img.shields.io/badge/docker%20layers-9-blue.svg?maxAge=2592000?style=flat-square)](https://hub.docker.com/r/yobasystems/alpine-xen-orchestra/) [![Docker Size](https://img.shields.io/badge/docker%20size-198%20MB-blue.svg?maxAge=2592000?style=flat-square)](https://hub.docker.com/r/yobasystems/alpine-xen-orchestra/) [![Docker Stars](https://img.shields.io/docker/stars/yobasystems/alpine-xen-orchestra.svg?maxAge=2592000?style=flat-square)](https://hub.docker.com/r/yobasystems/alpine-xen-orchestra/) [![Docker Pulls](https://img.shields.io/docker/pulls/yobasystems/alpine-xen-orchestra.svg?maxAge=2592000?style=flat-square)](https://hub.docker.com/r/yobasystems/alpine-xen-orchestra/)
 
-[![Alpine Version](https://img.shields.io/badge/alpine%20version-v3.6.2-green.svg?maxAge=2592000?style=flat-square)](http://alpinelinux.org/) [![Xen Orchestra Version](https://img.shields.io/badge/xo%20version-v5.13.0-green.svg?maxAge=2592000?style=flat-square)](https://xen-orchestra.com/)
+[![Alpine Version](https://img.shields.io/badge/alpine%20version-v3.7-green.svg?maxAge=2592000?style=flat-square)](http://alpinelinux.org/) [![Xen Orchestra Version](https://img.shields.io/badge/xo%20version-v5.22-green.svg?maxAge=2592000?style=flat-square)](https://xen-orchestra.com/)
 
 This Docker image [(yobasystems/alpine-xen-orchestra)](https://hub.docker.com/r/yobasystems/alpine-xen-orchestra/) is based on the minimal [Alpine Linux](http://alpinelinux.org/) with [Xen Orchestra](https://xen-orchestra.com/).
 
-##### Alpine Version 3.6.2 (Released Jun 17, 2017)
-##### Xen Orchestra Version 5.13.0
+##### Alpine Version 3.7 (Released Nov 23, 2017)
+##### Xen Orchestra Version 5.22
 
 ----
 
@@ -21,7 +21,7 @@ Xen Orchestra provides a web based UI for the management of XenServer installati
 
 * Minimal size only 198 MB and only 9 layers
 * Memory usage is minimal on Alpine rather than using Debian
-* Xen Orchestra version 5.13.0
+* Xen Orchestra version 5.22
 
 ## Architectures
 

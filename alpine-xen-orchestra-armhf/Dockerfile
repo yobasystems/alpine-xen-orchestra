@@ -3,12 +3,14 @@ FROM resin/armhf-alpine-node:9 as xoa-builder
 WORKDIR /app
 
 RUN apk update && \
-    apk add git build-base git curl python libstdc++ make gcc g++ libpng-dev yarn && \
+    apk add bash git build-base git curl python libstdc++ make gcc g++ libpng-dev yarn && \
     yarn global add node-gyp index-modules
 
 RUN git clone -b master https://github.com/vatesfr/xen-orchestra
 
-RUN cd xen-orchestra && yarn && yarn build
+COPY files/config.yaml xen-orchestra/packages/xo-server/.xo-server.yaml
+
+RUN cd /app/xen-orchestra && yarn && yarn build
 
 FROM resin/armhf-alpine-node:9 
 
@@ -18,11 +20,10 @@ ENV USER=xenorchestra \
     USER_HOME=/app
 
 RUN apk update -U && \
-    apk add -U libstdc++ util-linux yarn && \
+    apk add -U bash libstdc++ lvm2 nfs-utils su-exec tini util-linux yarn && \
     rm -rf /tmp/* /var/cache/apk/*
 
 COPY --from=xoa-builder /app/xen-orchestra /app/xen-orchestra
-COPY files/config.yaml /app/xen-orchestra/packages/xo-server/config.yaml
 
 COPY files/entrypoint.sh /entrypoint.sh
 
@@ -33,6 +34,7 @@ RUN addgroup -S $USER && adduser -S -g $USER $USER && \
 
 EXPOSE 8080
 
-USER root
+USER xenorchestra
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/sbin/tini", "--", "/entrypoint.sh" ]
+CMD ["yarn", "start"]

@@ -3,7 +3,7 @@ FROM resin/armhf-alpine-node:9 as xoa-builder
 WORKDIR /app
 
 RUN apk update && \
-    apk add bash git build-base git curl python libstdc++ make gcc g++ libpng-dev yarn
+    apk add --no-cache bash git build-base git curl python libstdc++ make gcc g++ libpng-dev yarn
 
 RUN git clone -b master https://github.com/vatesfr/xen-orchestra
 

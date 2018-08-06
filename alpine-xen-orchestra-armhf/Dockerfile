@@ -9,7 +9,7 @@ RUN git clone -b master https://github.com/vatesfr/xen-orchestra
 
 COPY files/config.yaml xen-orchestra/packages/xo-server/.xo-server.yaml
 
-RUN cd /app/xen-orchestra &&\
+RUN cd /app/xen-orchestra && \
     yarn && yarn build
 
 FROM resin/armhf-alpine-node:9 

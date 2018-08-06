@@ -1,4 +1,4 @@
-FROM node:8.11-alpine as xoa-builder
+FROM node:10-alpine as xoa-builder
 
 WORKDIR /app
 

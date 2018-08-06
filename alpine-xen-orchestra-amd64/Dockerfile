@@ -1,4 +1,4 @@
-FROM node:9-alpine as xoa-builder
+FROM node:8.11-alpine as xoa-builder
 
 WORKDIR /app
 
@@ -12,7 +12,7 @@ COPY files/config.yaml xen-orchestra/packages/xo-server/.xo-server.yaml
 
 RUN cd /app/xen-orchestra && yarn && yarn build
 
-FROM node:9-alpine
+FROM node:8.11-alpine
 
 LABEL maintainer "Dominic Taylor <dominic@yobasystems.co.uk>" architecture="AMD64/x86_64" date="25-nov-2017"
 

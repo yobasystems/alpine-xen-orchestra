@@ -1,4 +1,4 @@
-FROM resin/armhf-alpine-node:9 as xoa-builder
+FROM resin/armhf-alpine-node:10 as xoa-builder
 
 WORKDIR /app
 
@@ -12,7 +12,7 @@ COPY files/config.yaml xen-orchestra/packages/xo-server/.xo-server.yaml
 RUN cd /app/xen-orchestra && \
     yarn && yarn build
 
-FROM resin/armhf-alpine-node:9 
+FROM resin/armhf-alpine-node:10
 
 LABEL maintainer "Dominic Taylor <dominic@yobasystems.co.uk>" architecture="AMD64/x86_64" date="25-nov-2017"
 

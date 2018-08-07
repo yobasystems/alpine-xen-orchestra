@@ -1,9 +1,9 @@
-FROM node:10-alpine as xoa-builder
+FROM alpine:edge as xoa-builder
 
 WORKDIR /app
 
 RUN apk update && \
-    apk add --no-cache bash git build-base git curl python libstdc++ make gcc g++ libpng-dev
+    apk add --no-cache bash git build-base git curl nodejs python libstdc++ make gcc g++ libpng-dev yarn
 
 RUN git clone -b master https://github.com/vatesfr/xen-orchestra
 

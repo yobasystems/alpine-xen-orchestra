@@ -1,4 +1,4 @@
-FROM arm32v6/alpine:edge as xoa-builder
+FROM yobasystems/alpine:3.8-armhf as xoa-builder
 
 WORKDIR /app
 
@@ -12,7 +12,7 @@ COPY files/config.yaml xen-orchestra/packages/xo-server/.xo-server.yaml
 RUN cd /app/xen-orchestra && \
     yarn && yarn build
 
-FROM resin/armhf-alpine-node:10
+FROM yobasystems/alpine:3.8-armhf
 
 LABEL maintainer "Dominic Taylor <dominic@yobasystems.co.uk>" architecture="AMD64/x86_64" date="07-aug-2017"
 
@@ -20,7 +20,7 @@ ENV USER=xenorchestra \
     USER_HOME=/app
 
 RUN apk update -U && \
-    apk add -U bash libstdc++ lvm2 nfs-utils su-exec tini util-linux && \
+    apk add -U nodejs yarn bash libstdc++ lvm2 nfs-utils su-exec tini util-linux && \
     rm -rf /tmp/* /var/cache/apk/*
 
 COPY --from=xoa-builder /app/xen-orchestra /app/xen-orchestra

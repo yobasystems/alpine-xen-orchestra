@@ -14,13 +14,13 @@ RUN cd /app/xen-orchestra && \
 
 FROM node:10-alpine
 
-LABEL maintainer "Dominic Taylor <dominic@yobasystems.co.uk>" architecture="AMD64/x86_64" date="25-nov-2017"
+LABEL maintainer "Dominic Taylor <dominic@yobasystems.co.uk>" architecture="AMD64/x86_64" date="07-aug-2017"
 
 ENV USER=xenorchestra \
     USER_HOME=/app
 
 RUN apk update -U && \
-    apk add -U bash libstdc++ lvm2 nfs-utils su-exec tini util-linux yarn && \
+    apk add -U bash libstdc++ lvm2 nfs-utils su-exec tini util-linux && \
     rm -rf /tmp/* /var/cache/apk/*
 
 COPY --from=xoa-builder /app/xen-orchestra /app/xen-orchestra

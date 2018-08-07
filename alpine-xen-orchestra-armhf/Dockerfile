@@ -1,9 +1,9 @@
-FROM resin/armhf-alpine-node:10 as xoa-builder
+FROM arm32v6/alpine:edge as xoa-builder
 
 WORKDIR /app
 
 RUN apk update && \
-    apk add --no-cache bash git build-base git curl python libstdc++ make gcc g++ libpng-dev
+    apk add --no-cache bash git build-base git curl nodejs python libstdc++ make gcc g++ libpng-dev yarn
 
 RUN git clone -b master https://github.com/vatesfr/xen-orchestra
 
@@ -14,13 +14,13 @@ RUN cd /app/xen-orchestra && \
 
 FROM resin/armhf-alpine-node:10
 
-LABEL maintainer "Dominic Taylor <dominic@yobasystems.co.uk>" architecture="AMD64/x86_64" date="25-nov-2017"
+LABEL maintainer "Dominic Taylor <dominic@yobasystems.co.uk>" architecture="AMD64/x86_64" date="07-aug-2017"
 
 ENV USER=xenorchestra \
     USER_HOME=/app
 
 RUN apk update -U && \
-    apk add -U bash libstdc++ lvm2 nfs-utils su-exec tini util-linux yarn && \
+    apk add -U bash libstdc++ lvm2 nfs-utils su-exec tini util-linux && \
     rm -rf /tmp/* /var/cache/apk/*
 
 COPY --from=xoa-builder /app/xen-orchestra /app/xen-orchestra

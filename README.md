@@ -1,13 +1,16 @@
 # Xen Orchestra Docker image running on Alpine Linux
 
-[![Docker Layers](https://img.shields.io/badge/docker%20layers-9-blue.svg?maxAge=2592000?style=flat-square)](https://hub.docker.com/r/yobasystems/alpine-xen-orchestra/) [![Docker Size](https://img.shields.io/badge/docker%20size-198%20MB-blue.svg?maxAge=2592000?style=flat-square)](https://hub.docker.com/r/yobasystems/alpine-xen-orchestra/) [![Docker Stars](https://img.shields.io/docker/stars/yobasystems/alpine-xen-orchestra.svg?maxAge=2592000?style=flat-square)](https://hub.docker.com/r/yobasystems/alpine-xen-orchestra/) [![Docker Pulls](https://img.shields.io/docker/pulls/yobasystems/alpine-xen-orchestra.svg?maxAge=2592000?style=flat-square)](https://hub.docker.com/r/yobasystems/alpine-xen-orchestra/)
+[![Docker Automated build](https://img.shields.io/docker/automated/yobasystems/alpine-caddy.svg?style=for-the-badge&logo=docker)](https://hub.docker.com/r/yobasystems/alpine-caddy/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/yobasystems/alpine-caddy.svg?style=for-the-badge&logo=docker)](https://hub.docker.com/r/yobasystems/alpine-caddy/)
+[![Docker Stars](https://img.shields.io/docker/stars/yobasystems/alpine-caddy.svg?style=for-the-badge&logo=docker)](https://hub.docker.com/r/yobasystems/alpine-caddy/)
 
-[![Alpine Version](https://img.shields.io/badge/alpine%20version-v3.8.0-green.svg?maxAge=2592000?style=flat-square)](http://alpinelinux.org/) [![Xen Orchestra Version](https://img.shields.io/badge/xo%20version-v5.22-green.svg?maxAge=2592000?style=flat-square)](https://xen-orchestra.com/)
+[![Alpine Version](https://img.shields.io/badge/Alpine%20version-v3.10.1-green.svg?style=for-the-badge)](https://alpinelinux.org/)
+[![Caddy Version](https://img.shields.io/badge/XO%20version-v5.47.0-green.svg?style=for-the-badge)](https://xen-orchestra.com/)
 
 This Docker image [(yobasystems/alpine-xen-orchestra)](https://hub.docker.com/r/yobasystems/alpine-xen-orchestra/) is based on the minimal [Alpine Linux](http://alpinelinux.org/) with [Xen Orchestra](https://xen-orchestra.com/).
 
-##### Alpine Version 3.8.0 (Released June 26, 2018)
-##### Xen Orchestra Version 5.22
+##### Alpine Version 3.10.1 (Released July 11, 2019)
+##### Xen Orchestra Version 5.47.0
 
 ----
 
@@ -15,18 +18,17 @@ This Docker image [(yobasystems/alpine-xen-orchestra)](https://hub.docker.com/r/
 Alpine Linux is a Linux distribution built around musl libc and BusyBox. The image is only 5 MB in size and has access to a package repository that is much more complete than other BusyBox based images. This makes Alpine Linux a great image base for utilities and even production applications. Read more about Alpine Linux here and you can see how their mantra fits in right at home with Docker images.
 
 ## What is Xen Orchestra?
-Xen Orchestra provides a web based UI for the management of XenServer installations without requiring any agent or extra software on your hosts nor VMs. The primary goal of XO is to provide a unified management panel for a complete XenServer infrastructure, regardless of pool size and quantity of pools. For those seeking a web based replacement for XenCenter, Xen Orchestra fully supports VM lifecycle operations such as VM creation, migration or console access directly from a browser. Xen Orchestra extends the capabilities of XenCenter to also provide delegated resource access, delta backup, continuous replication, performance graphs and visualizations.
+Xen Orchestra provides a web based UI for the management of XenServer installations without requiring any agent or extra software on your hosts nor VMs. The primary goal of XO is to provide a unified management panel for a complete XenServer infrastructure, regardless of pool size and quantity of pools. For those seeking a web based replacement for XenCenter, Xen Orchestra fully supports VM lifecycle operations such as VM creation, migration or console access directly from a browser. Xen Orchestra extends the capabilities of XenCenter to also provide delegated resource access, delta backup, continuous replication, performance graphs and visualisations.
 
 ## Features
 
 * Minimal size only 198 MB and only 9 layers
 * Memory usage is minimal on Alpine rather than using Debian
-* Xen Orchestra version 5.22
+* Xen Orchestra version 5.47.0
 
 ## Architectures
 
 * ```:amd64```, ```:latest``` - 64 bit Intel/AMD (x86_64/amd64)
-* ```:i386```, ```:x86``` - 32 bit Intel/AMD (x86/i686)
 * ```:arm64v8```, ```:aarch64``` - 64 bit ARM (ARMv8/aarch64)
 * ```:arm32v7```, ```:armhf``` - 32 bit ARM (ARMv7/armhf)
 
@@ -34,10 +36,11 @@ Xen Orchestra provides a web based UI for the management of XenServer installati
 
 ## Tags
 
-* ```:latest```, ```:amd64``` latest branch based on amd64
+* ```:latest``` latest branch based (Automatic Architecture Selection)
 * ```:master``` master branch usually inline with latest
 * ```:v0.0.0``` version number related to docker version
 * ```:armhf```, ```:arm32v7``` Armv7 based on latest tag but arm architecture
+* ```:aarch64```, ```:arm64v8``` Armv8 based on latest tag but arm64 architecture
 
 ## Environment Variables:
 

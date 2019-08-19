@@ -1,4 +1,4 @@
-FROM yobasystems/alpine-nodejs:min-armhf as xoa-builder
+FROM yobasystems/alpine-nodejs:min-aarch64 as xoa-builder
 
 WORKDIR /app
 
@@ -11,13 +11,13 @@ COPY files/config.yaml xen-orchestra/packages/xo-server/.xo-server.yaml
 RUN cd /app/xen-orchestra && \
     yarn && yarn build
 
-FROM yobasystems/alpine-nodejs:min-armhf
+FROM yobasystems/alpine-nodejs:min-aarch64
 
 ARG BUILD_DATE
 ARG VCS_REF
 
 LABEL maintainer="Dominic Taylor <dominic@yobasystems.co.uk>" \
-    architecture="arm32v7/armhf" \
+    architecture="arm64v8/aarch64" \
     xenorchestra-version="5.47.0" \
     alpine-version="3.10.1" \
     build="19-Aug-2019" \

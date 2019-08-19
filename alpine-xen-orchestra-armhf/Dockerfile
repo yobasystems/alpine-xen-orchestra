@@ -1,4 +1,4 @@
-FROM yobasystems/alpine-nodejs:min-armhf as xoa-builder
+FROM yobasystems/alpine:3.8-armhf as xoa-builder
 
 WORKDIR /app
 

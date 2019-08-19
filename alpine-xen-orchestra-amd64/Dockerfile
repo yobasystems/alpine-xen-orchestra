@@ -1,4 +1,4 @@
-FROM yobasystems/alpine-nodejs:min-amd64 as xoa-builder
+FROM yobasystems/alpine:3.8-amd64 as xoa-builder
 
 WORKDIR /app
 

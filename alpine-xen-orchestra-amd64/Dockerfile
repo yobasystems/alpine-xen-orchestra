@@ -34,7 +34,7 @@ LABEL maintainer="Dominic Taylor <dominic@yobasystems.co.uk>" \
 ENV USER=xenorchestra \
     USER_HOME=/app
 
-RUN apk add --no-cache nodejs yarn bash libstdc++ lvm2 nfs-utils su-exec tini util-linux && \
+RUN apk add --no-cache nodejs yarn bash libstdc++ lvm2 nfs-utils su-exec tini util-linux rpcbind && \
     rm -rf /tmp/* /var/cache/apk/*
 
 COPY --from=xoa-builder /app/xen-orchestra /app/xen-orchestra

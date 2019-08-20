@@ -39,8 +39,7 @@ LABEL maintainer="Dominic Taylor <dominic@yobasystems.co.uk>" \
 ENV USER=xenorchestra \
     USER_HOME=/app
 
-RUN addgroup -S $USER && adduser -D -S -h $USER_HOME -G $USER $USER && \
-    chmod +x /entrypoint.sh
+RUN addgroup -S $USER && adduser -D -S -h $USER_HOME -G $USER $USER
 
 RUN apk add --no-cache nodejs bash libstdc++ lvm2 nfs-utils su-exec tini util-linux && \
     rm -rf /tmp/* /var/cache/apk/*
@@ -56,6 +55,7 @@ COPY --from=xoa-builder /usr/lib/libgcc* /usr/lib/libstdc* /usr/lib/
 COPY files/config.yaml /app/xen-orchestra/packages/xo-server/.xo-server.yaml
 
 COPY files/entrypoint.sh /entrypoint.sh
+RUN  chmod +x /entrypoint.sh
 
 EXPOSE 8080
 

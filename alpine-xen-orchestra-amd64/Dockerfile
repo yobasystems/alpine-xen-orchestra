@@ -4,14 +4,19 @@ WORKDIR /app
 
 RUN apk add --no-cache bash git build-base git curl nodejs python libstdc++ make gcc g++ libpng-dev yarn
 
-RUN git clone -b master https://github.com/vatesfr/xen-orchestra
+RUN git clone -b master https://github.com/vatesfr/xen-orchestra && \
+    rm -rf /app/xen-orchestra/.git && \
+    echo "[i] Allow config restore..." && \
+    sed -i "s|process.env.XOA_PLAN < 5|process.env.XOA_PLAN > 0|" /app/xen-orchestra/packages/xo-web/src/xo-app/settings/config/index.js && \
+    echo "[i] Patching github issue redirect..." && \
+    sed -i "s|https://github.com/vatesfr/xen-orchestra/issues/new|https://github.com/yobasystems/alpine-xen-orchestra/issues/new|" /app/xen-orchestra/packages/xo-web/src/xo-app/about/index.js && \
 
 COPY files/config.yaml xen-orchestra/packages/xo-server/.xo-server.yaml
 
 RUN cd /app/xen-orchestra && \
     yarn && yarn build
 
-FROM yobasystems/alpine-nodejs:min-amd64
+FROM yobasystems/alpine:3.8-amd64
 
 ARG BUILD_DATE
 ARG VCS_REF
@@ -19,8 +24,8 @@ ARG VCS_REF
 LABEL maintainer="Dominic Taylor <dominic@yobasystems.co.uk>" \
     architecture="amd64/x86_64" \
     xenorchestra-version="5.47.0" \
-    alpine-version="3.10.1" \
-    build="19-Aug-2019" \
+    alpine-version="3.8" \
+    build="20-Aug-2019" \
     org.opencontainers.image.title="alpine-xen-orchestra" \
     org.opencontainers.image.description="Xen Orchestra Docker image running on Alpine Linux" \
     org.opencontainers.image.authors="Dominic Taylor <dominic@yobasystems.co.uk>" \
@@ -34,21 +39,28 @@ LABEL maintainer="Dominic Taylor <dominic@yobasystems.co.uk>" \
 ENV USER=xenorchestra \
     USER_HOME=/app
 
-RUN apk add --no-cache nodejs yarn bash libstdc++ lvm2 nfs-utils su-exec tini util-linux rpcbind && \
+RUN addgroup -S $USER && adduser -D -S -h $USER_HOME -G $USER $USER && \
+    chmod +x /entrypoint.sh
+
+RUN apk add --no-cache nodejs bash libstdc++ lvm2 nfs-utils su-exec tini util-linux && \
     rm -rf /tmp/* /var/cache/apk/*
 
+RUN mkdir -p $USER_HOME && \
+    chown $USER:$USER $USER_HOME
+
+WORKDIR /app
+
 COPY --from=xoa-builder /app/xen-orchestra /app/xen-orchestra
+COPY --from=xoa-builder /usr/bin/node /usr/bin/
+COPY --from=xoa-builder /usr/lib/libgcc* /usr/lib/libstdc* /usr/lib/
+COPY files/config.yaml /app/xen-orchestra/packages/xo-server/.xo-server.yaml
 
 COPY files/entrypoint.sh /entrypoint.sh
 
-VOLUME /app/data
-
-RUN addgroup -S $USER && adduser -S -g $USER $USER && \
-    chmod +x /entrypoint.sh
-
 EXPOSE 8080
 
-USER xenorchestra
+WORKDIR /app/xen-orchestra/packages/xo-server/
 
 ENTRYPOINT ["/sbin/tini", "--", "/entrypoint.sh" ]
-CMD ["yarn", "start"]
+
+CMD ["./bin/xo-server"]

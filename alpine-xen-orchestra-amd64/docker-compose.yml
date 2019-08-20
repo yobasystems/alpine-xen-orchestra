@@ -1,8 +1,8 @@
 version: '2'
 services:
     xen-orchestra:
-        image: yobasystems/alpine-xen-orchestra:latest
-        command: yarn start
+        image: yobasystems/alpine-xen-orchestra:amd64
+        command: ./bin/xo-server
         container_name: xoa
         ports:
             - "8000:8080"
@@ -14,7 +14,7 @@ services:
             - /data/xoa/server:/app/data
     redis:
         container_name: xoa-redis
-        image: redis:alpine
+        image: yobasystems/alpine-redis:amd64
         command: redis-server --appendonly yes
         volumes:
             - /data/xoa/redis:/data

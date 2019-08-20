@@ -4,12 +4,12 @@
 [![Docker Pulls](https://img.shields.io/docker/pulls/yobasystems/alpine-caddy.svg?style=for-the-badge&logo=docker)](https://hub.docker.com/r/yobasystems/alpine-caddy/)
 [![Docker Stars](https://img.shields.io/docker/stars/yobasystems/alpine-caddy.svg?style=for-the-badge&logo=docker)](https://hub.docker.com/r/yobasystems/alpine-caddy/)
 
-[![Alpine Version](https://img.shields.io/badge/Alpine%20version-v3.10.1-green.svg?style=for-the-badge)](https://alpinelinux.org/)
+[![Alpine Version](https://img.shields.io/badge/Alpine%20version-v3.8-green.svg?style=for-the-badge)](https://alpinelinux.org/)
 [![Caddy Version](https://img.shields.io/badge/XO%20version-v5.47.0-green.svg?style=for-the-badge)](https://xen-orchestra.com/)
 
 This Docker image [(yobasystems/alpine-xen-orchestra)](https://hub.docker.com/r/yobasystems/alpine-xen-orchestra/) is based on the minimal [Alpine Linux](http://alpinelinux.org/) with [Xen Orchestra](https://xen-orchestra.com/).
 
-##### Alpine Version 3.10.1 (Released July 11, 2019)
+##### Alpine Version 3.8 (Released July 11, 2019)
 ##### Xen Orchestra Version 5.47.0
 
 ----

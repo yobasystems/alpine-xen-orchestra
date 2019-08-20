@@ -9,7 +9,7 @@ RUN git clone -b master https://github.com/vatesfr/xen-orchestra && \
     echo "[i] Allow config restore..." && \
     sed -i "s|process.env.XOA_PLAN < 5|process.env.XOA_PLAN > 0|" /app/xen-orchestra/packages/xo-web/src/xo-app/settings/config/index.js && \
     echo "[i] Patching github issue redirect..." && \
-    sed -i "s|https://github.com/vatesfr/xen-orchestra/issues/new|https://github.com/yobasystems/alpine-xen-orchestra/issues/new|" /app/xen-orchestra/packages/xo-web/src/xo-app/about/index.js && \
+    sed -i "s|https://github.com/vatesfr/xen-orchestra/issues/new|https://github.com/yobasystems/alpine-xen-orchestra/issues/new|" /app/xen-orchestra/packages/xo-web/src/xo-app/about/index.js
 
 COPY files/config.yaml xen-orchestra/packages/xo-server/.xo-server.yaml
 

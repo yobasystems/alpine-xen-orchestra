@@ -9,7 +9,7 @@
 
 This Docker image [(yobasystems/alpine-xen-orchestra)](https://hub.docker.com/r/yobasystems/alpine-xen-orchestra/) is based on the minimal [Alpine Linux](http://alpinelinux.org/) with [Xen Orchestra](https://xen-orchestra.com/).
 
-##### Alpine Version 3.8 (Released July 11, 2019)
+##### Alpine Version 3.8.2 (Released Dec 20, 2018)
 ##### Xen Orchestra Version 5.47.0
 
 ----
@@ -18,11 +18,21 @@ This Docker image [(yobasystems/alpine-xen-orchestra)](https://hub.docker.com/r/
 Alpine Linux is a Linux distribution built around musl libc and BusyBox. The image is only 5 MB in size and has access to a package repository that is much more complete than other BusyBox based images. This makes Alpine Linux a great image base for utilities and even production applications. Read more about Alpine Linux here and you can see how their mantra fits in right at home with Docker images.
 
 ## What is Xen Orchestra?
-Xen Orchestra provides a web based UI for the management of XenServer installations without requiring any agent or extra software on your hosts nor VMs. The primary goal of XO is to provide a unified management panel for a complete XenServer infrastructure, regardless of pool size and quantity of pools. For those seeking a web based replacement for XenCenter, Xen Orchestra fully supports VM lifecycle operations such as VM creation, migration or console access directly from a browser. Xen Orchestra extends the capabilities of XenCenter to also provide delegated resource access, delta backup, continuous replication, performance graphs and visualisations.
+Xen Orchestra provides a web based UI for the management and administration of XCP-ng installations without requiring any agent or extra software on your hosts nor VMs. The primary goal of XO is to provide a unified management panel for a complete XCP-ng infrastructure, regardless of pool size and quantity of pools. For those seeking a web based replacement for XCP-ng Center, Xen Orchestra fully supports VM lifecycle operations such as VM creation, migration or console access directly from a browser. Xen Orchestra extends the capabilities of XCP-ng to also provide delegated resource access, delta backup, continuous replication, performance graphs and visualisations.
+
+[More Info](https://xen-orchestra.com/#!/xo-home) | [Pro Support](https://xen-orchestra.com/#!/xo-pricing) (Highly recommended) | [Source Code](https://github.com/vatesfr/xen-orchestra)
+
+_ (May also work with Citrix Xenserver but XCP-ng is the better choice) _
+
+### What is XCP-ng?
+Based on XenServer, XCP-ng is the result of massive cooperation between individuals and companies, to deliver a product without limits. No restrictions on features and every bit available on GitHub! XCP-ng is a turnkey open source virtualisation platform.
+
+[More Info](https://xcp-ng.org/) | [Download .iso](http://mirrors.xcp-ng.org/isos/8.0/xcp-ng-8.0.0.iso) | [Source Code](https://github.com/xcp-ng/xcp)
+
 
 ## Features
 
-* Minimal size only 198 MB and only 9 layers
+* Minimal size & layers
 * Memory usage is minimal on Alpine rather than using Debian
 * Xen Orchestra version 5.47.0
 
@@ -38,26 +48,26 @@ Xen Orchestra provides a web based UI for the management of XenServer installati
 
 * ```:latest``` latest branch based (Automatic Architecture Selection)
 * ```:master``` master branch usually inline with latest
-* ```:v0.0.0``` version number related to docker version
+* ```:v5.47.0``` version number related to xen orchestra version (Automatic Architecture Selection)
 * ```:armhf```, ```:arm32v7``` Armv7 based on latest tag but arm architecture
 * ```:aarch64```, ```:arm64v8``` Armv8 based on latest tag but arm64 architecture
 
 ## Environment Variables:
 
-### Main Xen parameters:
+### Main Xen Orchestra parameters:
 
 * Check the config.yaml file for options, or leave for defaults.
 
 ## Creating an instance
 
-A redis container is required, e.g redis:alpine to be linked to the xen orchestra container. Check docker compose example for more info.
+A redis container is required, e.g redis:alpine or yobasystems/alpine-redis to be linked to the Xen Orchestra container. Check the docker compose example for more info.
 
 ### Getting Started
 
 To forward all external traffic from port 80 to the container’s port 8080
 
 ```sh
-$ docker run -d --name xen-orchestra -p 80:8080 yobasystems/alpine-xen-orchestra yarn start
+$ docker run -d --name xen-orchestra -p 80:8080 yobasystems/alpine-xen-orchestra ./bin/xo-server
 ```
 
 Point your browser to `http://host-ip`.
@@ -70,9 +80,9 @@ services:
     xen-orchestra:
         image: yobasystems/alpine-xen-orchestra:latest
         container_name: xoa
-        command: yarn start
+        command: ./bin/xo-server
         ports:
-            - "8000:8080"
+            - "8080:8080"
         depends_on:
             - redis
         environment:

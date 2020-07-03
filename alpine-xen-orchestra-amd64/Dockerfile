@@ -1,5 +1,5 @@
 FROM alpine:3.12 as xoa-builder
-
+#edit by marllus lustosa - https://github.com/marlluslustosa/alpine-xen-orchestra
 WORKDIR /app
 
 RUN apk add --no-cache bash git build-base git curl nodejs python2 libstdc++ make gcc g++ libpng-dev yarn

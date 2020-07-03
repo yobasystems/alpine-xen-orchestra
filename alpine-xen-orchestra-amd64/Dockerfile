@@ -1,8 +1,8 @@
-FROM yobasystems/alpine:3.8-amd64 as xoa-builder
+FROM alpine:3.12 as xoa-builder
 
 WORKDIR /app
 
-RUN apk add --no-cache bash git build-base git curl nodejs python libstdc++ make gcc g++ libpng-dev yarn
+RUN apk add --no-cache bash git build-base git curl nodejs python2 libstdc++ make gcc g++ libpng-dev yarn
 
 RUN git clone -b master https://github.com/vatesfr/xen-orchestra && \
     rm -rf /app/xen-orchestra/.git && \
@@ -16,7 +16,7 @@ COPY files/config.yaml xen-orchestra/packages/xo-server/.xo-server.yaml
 RUN cd /app/xen-orchestra && \
     yarn && yarn build
 
-FROM yobasystems/alpine:3.8-amd64
+FROM alpine:3.12
 
 ARG BUILD_DATE
 ARG VCS_REF
@@ -24,7 +24,7 @@ ARG VCS_REF
 LABEL maintainer="Dominic Taylor <dominic@yobasystems.co.uk>" \
     architecture="amd64/x86_64" \
     xenorchestra-version="5.47.0" \
-    alpine-version="3.8" \
+    alpine-version="3.12" \
     build="20-Aug-2019" \
     org.opencontainers.image.title="alpine-xen-orchestra" \
     org.opencontainers.image.description="Xen Orchestra Docker image running on Alpine Linux" \

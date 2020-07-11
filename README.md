@@ -64,13 +64,7 @@ A redis container is required, e.g redis:alpine or yobasystems/alpine-redis to b
 
 ### Getting Started
 
-To forward all external traffic from port 80 to the container’s port 8080
-
-```sh
-$ docker run -d --name xen-orchestra -p 80:8080 yobasystems/alpine-xen-orchestra ./bin/xo-server
-```
-
-Point your browser to `http://host-ip`.
+Build local image:
 
 ## Docker Compose example:
 
@@ -78,11 +72,11 @@ Point your browser to `http://host-ip`.
 version: '2'
 services:
     xen-orchestra:
-        image: yobasystems/alpine-xen-orchestra:latest
-        container_name: xoa
+        build: .
         command: ./bin/xo-server
+        container_name: xoa
         ports:
-            - "8080:8080"
+            - "8000:8080"
         depends_on:
             - redis
         environment:
@@ -95,18 +89,9 @@ services:
         command: redis-server --appendonly yes
         volumes:
             - /data/xoa/redis:/data
+
 ```
 
 ## Source Repository
 
-* [Bitbucket - yobasystems/alpine-xen-orchestra](https://bitbucket.org/yobasystems/alpine-xen-orchestra/)
-
 * [Github - yobasystems/alpine-xen-orchestra](https://github.com/yobasystems/alpine-xen-orchestra)
-
-## Links
-
-* [Yoba Systems](https://www.yobasystems.co.uk/)
-
-* [Dockerhub - yobasystems](https://hub.docker.com/u/yobasystems/)
-
-* [Quay.io - yobasystems](https://quay.io/organization/yobasystems)
